@@ -1,7 +1,8 @@
+const server = require('express')();
 const app = require('./config/express')();
 const port = app.get('port');
+const baseURL = '/api/v1'
 
-// RUNNING APPLICATION ON THE CONFIGURED PORT
-app.listen(port, () => {
-  console.log(`Server Running on Port ${port}`)
+server.use(baseURL, app).listen(port, () => {
+  console.log(`Server is Listening on Port ${port}`)
 });

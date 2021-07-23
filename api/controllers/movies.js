@@ -1,9 +1,10 @@
+const axios = require('axios');
+const controller = {};
 
-module.exports = app => {
-    const movies = app.data.movies;
-    const controller = {};
+controller.movies = (_, res) => {
+    axios.get('https://api.themoviedb.org/3/movie/popular?api_key=86edbafd587030693158039afb48e826')
+        .then(response => res.json(response.data))
+        .catch(err => res.json(err));
+};
 
-    controller.listCustomerWallets = (req, res) => res.status(200).json(movies);
-
-    return controller;
-}
+module.exports = controller;
