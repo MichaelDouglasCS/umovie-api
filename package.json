@@ -9,7 +9,7 @@
     "npm": "6.14.13"
   },
   "scripts": {
-    "start": "NODE_ENV=production node server",
+    "start": "node server",
     "debug": "nodemon server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

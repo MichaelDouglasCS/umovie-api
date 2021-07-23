@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const port = app.get('port');
 
 // MONGODB CONNECTION
+process.env.NODE_ENV = 'production';
+
 const databaseURI = process.env.MONGODB_URI || config.database.uri
 
 const mongodbOptions = { 
