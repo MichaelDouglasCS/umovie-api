@@ -19,7 +19,7 @@ controller.register = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
-    const user = new User({
+    const newUser = new User({
         id: uuid.v4(),
         email: req.body.email,
         password: hashedPassword,
@@ -30,11 +30,23 @@ controller.register = async (req, res) => {
     });
 
     try {
-        const savedUser = await user.save();
+        const savedUser = await newUser.save();
         res.status(200).json(savedUser);
     } catch(err) {
         res.status(500).json(err);
     }
+};
+
+// LOGIN BY EMAIL
+controller.login = async (req, res) => {
+
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) return res.status(400).json(handleErrors.emailNotExist()); 
+
+    const isValidPassword = await bcrypt.compare(req.body.password, user.password);
+    if (!isValidPassword) return res.status(400).json(handleErrors.invalidPassword()); 
+
+    res.status(200).json(user);
 };
 
 module.exports = controller;
