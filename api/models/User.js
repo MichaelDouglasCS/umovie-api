@@ -40,6 +40,7 @@ const UserSchema = new mongoose.Schema({
 // HIDDEN SOME PROPERTIES
 UserSchema.set('toJSON', {
     transform: function (_, ret, _) {
+        delete ret.password;
         delete ret._id;
         delete ret.__v;
     }

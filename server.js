@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const port = app.get('port');
 
 // MONGODB CONNECTION
-const databaseURI = process.env.MONGODB_URI || config.database.uri
+const databaseURI = process.env.MONGODB_URI || config.get('database.uri');
 
 const mongodbOptions = { 
   useUnifiedTopology: true,
