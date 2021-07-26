@@ -6,7 +6,7 @@ const User = require('../api/models/User');
 // PASSPORT OPTIONS
 const options = {
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-    secretOrKey: process.env.SECRET_KEY || config.get('server.secretKey')
+    secretOrKey: process.env.TOKEN_SECRET || config.get('server.tokenSecret')
 };
 
 // CONFIGURE JWT STRATEGY

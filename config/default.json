@@ -1,7 +1,7 @@
 {
     "server": {
         "port": 8080,
-        "secretKey": "uMovie@2021@Mdcs@10071973"
+        "tokenSecret": "uMovie@2021@Mdcs@10071973"
     },
     "database": {
         "uri": "mongodb://127.0.0.1:27017/umovie"
