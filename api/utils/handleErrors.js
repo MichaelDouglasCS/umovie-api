@@ -1,6 +1,5 @@
 
 // USER ERRORS
-
 const emailAlreadyExists = () => {
     let error = {
         success: false,
@@ -32,6 +31,16 @@ const invalidPassword = () => {
 };
 
 const usernameAlreadyExists = () => {
+    let error = {
+        success: false,
+        code: "username-already-exists",
+        message: "This username already exists. You must pass another one!"
+    };
+
+    return error;
+};
+
+const invalidToken = () => {
     let error = {
         success: false,
         code: "username-already-exists",

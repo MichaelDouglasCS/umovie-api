@@ -1,4 +1,10 @@
+const passport = require('passport');
+const router = require('express').Router();
+
 module.exports = app => {
     const controller = app.controllers.movies;
-    app.route('/movies').get(controller.getMovies);
-}
+
+    router.get('/movies', passport.authenticate('jwt', { session: false }), controller.getMovies);
+    
+    app.use(router);
+};

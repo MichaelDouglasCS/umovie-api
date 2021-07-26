@@ -1,10 +1,10 @@
-const User = require('../models/User');
-const jwt = require('jsonwebtoken');
-const handleErrors = require('../utils/handleErrors');
-const uuid = require('uuid');
 const bcrypt = require('bcryptjs');
 const config = require('config');
 const controller = {};
+const handleErrors = require('../utils/handleErrors');
+const jwt = require('jsonwebtoken');
+const User = require('../models/User');
+const uuid = require('uuid');
 
 // REGISTER BY EMAIL
 controller.register = async (req, res) => {
@@ -36,8 +36,8 @@ controller.register = async (req, res) => {
         const token = generateTokenByUser(savedUser);
         
         res.status(200).json({ token: token, user: savedUser });
-    } catch(err) {
-        res.status(500).json(err);
+    } catch(error) {
+        res.status(500).json(error);
     }
 };
 

@@ -1,8 +1,11 @@
-const server = require('express')();
 const app = require('./config/express')();
 const config = require('config');
 const mongoose = require('mongoose');
+const passport = require('passport');
 const port = app.get('port');
+const server = require('express')();
+
+require('./config/passport')(passport);
 
 // MONGODB CONNECTION
 const databaseURI = process.env.MONGODB_URI || config.get('database.uri');
