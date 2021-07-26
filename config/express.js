@@ -19,7 +19,7 @@ module.exports = () => {
   app.use(morgan('combined'));
 
   // ENDPOINTS
-  consign({cwd: 'api'})
+  consign({ cwd: 'api' })
     .then('controllers')
     .then('routes')
     .into(app);

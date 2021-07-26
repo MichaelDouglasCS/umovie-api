@@ -41,10 +41,10 @@ controller.register = async (req, res) => {
 controller.login = async (req, res) => {
 
     const user = await User.findOne({ email: req.body.email });
-    if (!user) return res.status(400).json(handleErrors.emailNotExist()); 
+    if (!user) return res.status(400).json(handleErrors.emailNotExist());
 
     const isValidPassword = await bcrypt.compare(req.body.password, user.password);
-    if (!isValidPassword) return res.status(400).json(handleErrors.invalidPassword()); 
+    if (!isValidPassword) return res.status(400).json(handleErrors.invalidPassword());
 
     res.status(200).json(user);
 };
