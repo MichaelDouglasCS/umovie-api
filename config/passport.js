@@ -12,8 +12,11 @@ const options = {
 // CONFIGURE JWT STRATEGY
 const strategy = new JWTStrategy(options, async (token, done) => {
     try {
+        console.log('DEU BOM')
         return done(null, token);
     } catch (error) {
+        console.log('DEU MERDA');
+        console.log(process.env.TOKEN_SECRET);
         done(error);
     }
 });
