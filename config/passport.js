@@ -4,8 +4,10 @@ const JWTStrategy = require('passport-jwt').Strategy;
 const User = require('../api/models/User');
 
 // PASSPORT OPTIONS
-const secretOrKey = process.env.TOKEN_SECRET || config.get('server.tokenSecret');
-const options = { jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(), secretOrKey: secretOrKey };
+const options = {
+    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+    secretOrKey: process.env.TOKEN_SECRET || config.get('server.tokenSecret')
+};
 
 // CONFIGURE JWT STRATEGY
 const strategy = new JWTStrategy(options, async (token, done) => {

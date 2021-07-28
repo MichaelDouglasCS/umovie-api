@@ -58,7 +58,7 @@ controller.login = async (req, res) => {
 // GENERATE TOKEN
 generateTokenByUser = function(user) {
     const payload = { id: user.id, email: user.email };
-    const secretKey = process.env.SECRET_KEY || config.get('server.tokenSecret');
+    const secretKey = process.env.TOKEN_SECRET || config.get('server.tokenSecret');
     const token = jwt.sign(payload, secretKey);
     return token;
 };
