@@ -5,6 +5,7 @@ const handleErrors = require('../utils/handleErrors');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const uuid = require('uuid');
+const passport = require('passport');
 
 // REGISTER BY EMAIL
 controller.register = async (req, res) => {
@@ -53,6 +54,17 @@ controller.login = async (req, res) => {
     const token = generateTokenByUser(user);
 
     res.status(200).json({ token: token, user: user });
+};
+
+// LOGIN BY FACEBOOK
+controller.facebook = async (req, res) => {
+    passport.authenticate("facebook", (error, user, info) => {
+        if (error || !user) {
+            res.status(400).json(error);
+        } else {
+            res.status(200).json(user._json);
+        }
+    })(req, res);
 };
 
 // GENERATE TOKEN
