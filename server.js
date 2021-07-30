@@ -1,10 +1,10 @@
 const app = require('./config/express')();
 const config = require('config');
 const mongoose = require('mongoose');
-const passport = require('passport');
 const port = app.get('port');
 const server = require('express')();
 
+const passport = require('passport');
 require('./config/passport')(passport);
 
 // MONGODB CONNECTION

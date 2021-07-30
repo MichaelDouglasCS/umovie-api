@@ -1,14 +1,14 @@
 const bcrypt = require('bcryptjs');
 const config = require('config');
-const controller = {};
 const handleErrors = require('../utils/handleErrors');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const uuid = require('uuid');
-const passport = require('passport');
+
+const controller = {};
 
 // REGISTER BY EMAIL
-controller.register = async (req, res) => {
+controller.registerByEmail = async (req, res) => {
 
     const emailAlreadyExists = await User.findOne({ email: req.body.email });
     const usernameAlreadyExists = await User.findOne({ username: req.body.username });
@@ -43,7 +43,7 @@ controller.register = async (req, res) => {
 };
 
 // LOGIN BY EMAIL
-controller.login = async (req, res) => {
+controller.loginByEmail = async (req, res) => {
 
     const user = await User.findOne({ email: req.body.email });
     if (!user) return res.status(400).json(handleErrors.emailNotExist());
@@ -56,21 +56,10 @@ controller.login = async (req, res) => {
     res.status(200).json({ token: token, user: user });
 };
 
-// LOGIN BY FACEBOOK
-controller.facebook = async (req, res) => {
-    passport.authenticate("facebook", (error, user, info) => {
-        if (error || !user) {
-            res.status(400).json(error);
-        } else {
-            res.status(200).json(user._json);
-        }
-    })(req, res);
-};
-
 // GENERATE TOKEN
 generateTokenByUser = function(user) {
     const payload = { id: user.id, email: user.email };
-    const secretKey = process.env.TOKEN_SECRET || config.get('server.tokenSecret');
+    const secretKey = process.env.TOKEN_SECRET || config.get('authentication.tokenSecret');
     const token = jwt.sign(payload, secretKey);
     return token;
 };

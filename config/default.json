@@ -1,14 +1,11 @@
 {
     "server": {
-        "port": 8080,
-        "tokenSecret": "uMovie@2021@Mdcs@10071973"
+        "port": 8080
     },
     "database": {
         "uri": "mongodb://127.0.0.1:27017/umovie"
     },
-    "facebook": {
-        "clientID": "964947254343076",
-        "clientSecret": "c6d4460bbbccd7018738d527b77a5e19",
-        "callbackURL": "https://umovie-api.herokuapp.com/v1/user/facebook/callback"
+    "authentication": {
+        "tokenSecret": "uMovie@2021@Mdcs@10071973"
     }
 }
