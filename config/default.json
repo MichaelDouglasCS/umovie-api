@@ -7,5 +7,8 @@
     },
     "authentication": {
         "tokenSecret": "uMovie@2021@Mdcs@10071973"
+    },
+    "tmdb": {
+        "apiKey": "86edbafd587030693158039afb48e826"
     }
 }

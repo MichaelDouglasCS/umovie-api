@@ -2,50 +2,50 @@ const axios = require('axios');
 const config = require('config');
 const controller = {};
 
-const providerBaseURL = 'https://api.themoviedb.org/3/movie'
+const providerBaseURL = 'https://api.themoviedb.org/3/tv'
 const providerAPIKey = config.get('tmdb.apiKey');
 
-// POPULAR MOVIES
-controller.getPopular = (req, res) => {
+// POPULAR SERIES
+controller.getPopular = (_, res) => {
     axios.get(providerBaseURL + '/popular?api_key=' + providerAPIKey)
         .then((response) => {
             let page = response.data.page;
             let totalPages = response.data.total_pages;
-            let movies = response.data.results;
-            res.status(200).json({ page: page, movies: movies, totalPages: totalPages });
+            let series = response.data.results;
+            res.status(200).json({ page: page, series: series, totalPages: totalPages });
         }).catch(error => res.status(400).json(error));
 };
 
-// NOW PLAYING MOVIES
-controller.getNowPlaying = (_, res) => {
-    axios.get(providerBaseURL + '/now_playing?api_key=' + providerAPIKey)
+// AIRING TODAY SERIES
+controller.getAiringToday = (_, res) => {
+    axios.get(providerBaseURL + '/airing_today?api_key=' + providerAPIKey)
         .then((response) => {
             let page = response.data.page;
             let totalPages = response.data.total_pages;
-            let movies = response.data.results;
-            res.status(200).json({ page: page, movies: movies, totalPages: totalPages });
+            let series = response.data.results;
+            res.status(200).json({ page: page, series: series, totalPages: totalPages });
         }).catch(error => res.status(400).json(error));
 };
 
-// UPCOMING MOVIES
-controller.getUpcoming = (_, res) => {
-    axios.get(providerBaseURL + '/upcoming?api_key=' + providerAPIKey)
+// ON AIR SERIES
+controller.getOnAir = (_, res) => {
+    axios.get(providerBaseURL + '/on_the_air?api_key=' + providerAPIKey)
         .then((response) => {
             let page = response.data.page;
             let totalPages = response.data.total_pages;
-            let movies = response.data.results;
-            res.status(200).json({ page: page, movies: movies, totalPages: totalPages });
+            let series = response.data.results;
+            res.status(200).json({ page: page, series: series, totalPages: totalPages });
         }).catch(error => res.status(400).json(error));
 };
 
-// TOP RATED MOVIES
+// TOP RATED SERIES
 controller.getTopRated = (_, res) => {
     axios.get(providerBaseURL + '/top_rated?api_key=' + providerAPIKey)
         .then((response) => {
             let page = response.data.page;
             let totalPages = response.data.total_pages;
-            let movies = response.data.results;
-            res.status(200).json({ page: page, movies: movies, totalPages: totalPages });
+            let series = response.data.results;
+            res.status(200).json({ page: page, series: series, totalPages: totalPages });
         }).catch(error => res.status(400).json(error));
 };
 
