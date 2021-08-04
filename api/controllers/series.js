@@ -1,5 +1,6 @@
 const axios = require('axios');
 const config = require('config');
+const queryParameters = require('../utils/queryParameters');
 const controller = {};
 
 const providerBaseURL = 'https://api.themoviedb.org/3/tv'
@@ -7,7 +8,8 @@ const providerAPIKey = config.get('tmdb.apiKey');
 
 // POPULAR SERIES
 controller.getPopular = (_, res) => {
-    axios.get(providerBaseURL + '/popular?api_key=' + providerAPIKey)
+    let parameters = queryParameters.getByRequest(req);
+    axios.get(providerBaseURL + '/popular?api_key=' + providerAPIKey + parameters)
         .then((response) => {
             let page = response.data.page;
             let totalPages = response.data.total_pages;
@@ -18,7 +20,8 @@ controller.getPopular = (_, res) => {
 
 // AIRING TODAY SERIES
 controller.getAiringToday = (_, res) => {
-    axios.get(providerBaseURL + '/airing_today?api_key=' + providerAPIKey)
+    let parameters = queryParameters.getByRequest(req);
+    axios.get(providerBaseURL + '/airing_today?api_key=' + providerAPIKey + parameters)
         .then((response) => {
             let page = response.data.page;
             let totalPages = response.data.total_pages;
@@ -29,7 +32,8 @@ controller.getAiringToday = (_, res) => {
 
 // ON AIR SERIES
 controller.getOnAir = (_, res) => {
-    axios.get(providerBaseURL + '/on_the_air?api_key=' + providerAPIKey)
+    let parameters = queryParameters.getByRequest(req);
+    axios.get(providerBaseURL + '/on_the_air?api_key=' + providerAPIKey + parameters)
         .then((response) => {
             let page = response.data.page;
             let totalPages = response.data.total_pages;
@@ -40,7 +44,8 @@ controller.getOnAir = (_, res) => {
 
 // TOP RATED SERIES
 controller.getTopRated = (_, res) => {
-    axios.get(providerBaseURL + '/top_rated?api_key=' + providerAPIKey)
+    let parameters = queryParameters.getByRequest(req);
+    axios.get(providerBaseURL + '/top_rated?api_key=' + providerAPIKey + parameters)
         .then((response) => {
             let page = response.data.page;
             let totalPages = response.data.total_pages;
