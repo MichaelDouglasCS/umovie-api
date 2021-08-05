@@ -19,7 +19,7 @@ controller.getPopular = (req, res) => {
 };
 
 // NOW PLAYING MOVIES
-controller.getNowPlaying = (_, res) => {
+controller.getNowPlaying = (req, res) => {
     let parameters = queryParameters.getByRequest(req);
     axios.get(providerBaseURL + '/now_playing?api_key=' + providerAPIKey + parameters)
         .then((response) => {
@@ -31,7 +31,7 @@ controller.getNowPlaying = (_, res) => {
 };
 
 // UPCOMING MOVIES
-controller.getUpcoming = (_, res) => {
+controller.getUpcoming = (req, res) => {
     let parameters = queryParameters.getByRequest(req);
     axios.get(providerBaseURL + '/upcoming?api_key=' + providerAPIKey + parameters)
         .then((response) => {
@@ -43,7 +43,7 @@ controller.getUpcoming = (_, res) => {
 };
 
 // TOP RATED MOVIES
-controller.getTopRated = (_, res) => {
+controller.getTopRated = (req, res) => {
     let parameters = queryParameters.getByRequest(req);
     axios.get(providerBaseURL + '/top_rated?api_key=' + providerAPIKey + parameters)
         .then((response) => {
@@ -51,6 +51,15 @@ controller.getTopRated = (_, res) => {
             let totalPages = response.data.total_pages;
             let movies = response.data.results;
             res.status(200).json({ page: page, movies: movies, totalPages: totalPages });
+        }).catch(error => res.status(400).json(error));
+};
+
+// MOVIE DETAILS
+controller.getDetails = (req, res) => {
+    let parameters = queryParameters.getByRequest(req);
+    axios.get(providerBaseURL + `/${req.params.id}?api_key=` + providerAPIKey + parameters)
+        .then((response) => {
+            res.status(200).json(response.data);
         }).catch(error => res.status(400).json(error));
 };
 

@@ -7,7 +7,7 @@ const providerBaseURL = 'https://api.themoviedb.org/3/tv'
 const providerAPIKey = config.get('tmdb.apiKey');
 
 // POPULAR SERIES
-controller.getPopular = (_, res) => {
+controller.getPopular = (req, res) => {
     let parameters = queryParameters.getByRequest(req);
     axios.get(providerBaseURL + '/popular?api_key=' + providerAPIKey + parameters)
         .then((response) => {
@@ -19,7 +19,7 @@ controller.getPopular = (_, res) => {
 };
 
 // AIRING TODAY SERIES
-controller.getAiringToday = (_, res) => {
+controller.getAiringToday = (req, res) => {
     let parameters = queryParameters.getByRequest(req);
     axios.get(providerBaseURL + '/airing_today?api_key=' + providerAPIKey + parameters)
         .then((response) => {
@@ -31,7 +31,7 @@ controller.getAiringToday = (_, res) => {
 };
 
 // ON AIR SERIES
-controller.getOnAir = (_, res) => {
+controller.getOnAir = (req, res) => {
     let parameters = queryParameters.getByRequest(req);
     axios.get(providerBaseURL + '/on_the_air?api_key=' + providerAPIKey + parameters)
         .then((response) => {
@@ -43,7 +43,7 @@ controller.getOnAir = (_, res) => {
 };
 
 // TOP RATED SERIES
-controller.getTopRated = (_, res) => {
+controller.getTopRated = (req, res) => {
     let parameters = queryParameters.getByRequest(req);
     axios.get(providerBaseURL + '/top_rated?api_key=' + providerAPIKey + parameters)
         .then((response) => {
