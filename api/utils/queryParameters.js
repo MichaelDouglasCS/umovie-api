@@ -1,9 +1,10 @@
 
 // GET QUERY PARAMETERS
-const getByRequest = (req) => {
-    return `&page=${req.query.page ?? 1}&language=${req.query.language ?? "pt-BR"}`
+const getParametersBy = (req) => {
+    let page = req.query.page != null ? `&page=${req.query.page}` : ``;
+    return `${page}&language=${req.query.language ?? "pt-BR"}`
 };
 
 module.exports = {
-    getByRequest: getByRequest
+    getParametersBy: getParametersBy
 };
