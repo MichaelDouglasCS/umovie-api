@@ -18,9 +18,9 @@ controller.getDetails = (req, res) => {
         let credits = responses[1];
         let externalIDs = responses[2];
         res.status(200).json({
-            details: details.data,
-            credits: credits.data,
-            externalIDs: externalIDs.data
+            "details": details.data,
+            "credits": credits.data,
+            "external_ids": externalIDs.data
         });
     })).catch(error => res.status(400).json(error));
 };

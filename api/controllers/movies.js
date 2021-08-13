@@ -14,7 +14,7 @@ controller.getTrending = (req, res) => {
             let page = response.data.page;
             let totalPages = response.data.total_pages;
             let movies = response.data.results;
-            res.status(200).json({ page: page, movies: movies, totalPages: totalPages });
+            res.status(200).json({ "page": page, "movies": movies, "total_pages": totalPages });
         }).catch(error => res.status(400).json(error));
 };
 
@@ -26,7 +26,7 @@ controller.getPopular = (req, res) => {
             let page = response.data.page;
             let totalPages = response.data.total_pages;
             let movies = response.data.results;
-            res.status(200).json({ page: page, movies: movies, totalPages: totalPages });
+            res.status(200).json({ "page": page, "movies": movies, "total_pages": totalPages });
         }).catch(error => res.status(400).json(error));
 };
 
@@ -38,7 +38,7 @@ controller.getNowPlaying = (req, res) => {
             let page = response.data.page;
             let totalPages = response.data.total_pages;
             let movies = response.data.results;
-            res.status(200).json({ page: page, movies: movies, totalPages: totalPages });
+            res.status(200).json({ "page": page, "movies": movies, "total_pages": totalPages });
         }).catch(error => res.status(400).json(error));
 };
 
@@ -50,7 +50,7 @@ controller.getUpcoming = (req, res) => {
             let page = response.data.page;
             let totalPages = response.data.total_pages;
             let movies = response.data.results;
-            res.status(200).json({ page: page, movies: movies, totalPages: totalPages });
+            res.status(200).json({ "page": page, "movies": movies, "total_pages": totalPages });
         }).catch(error => res.status(400).json(error));
 };
 
@@ -62,7 +62,7 @@ controller.getTopRated = (req, res) => {
             let page = response.data.page;
             let totalPages = response.data.total_pages;
             let movies = response.data.results;
-            res.status(200).json({ page: page, movies: movies, totalPages: totalPages });
+            res.status(200).json({ "page": page, "movies": movies, "total_pages": totalPages });
         }).catch(error => res.status(400).json(error));
 };
 
@@ -83,11 +83,11 @@ controller.getDetails = (req, res) => {
         let recommendations = responses[3];
         let watchProviders = responses[4];
         res.status(200).json({
-            details: details.data,
-            credits: credits.data,
-            externalIDs: externalIDs.data,
-            recommendations: recommendations.data,
-            watchProviders: watchProviders.data
+            "details": details.data,
+            "credits": credits.data,
+            "externa_ids": externalIDs.data,
+            "recommendations": recommendations.data,
+            "watch_providers": watchProviders.data
         });
     })).catch(error => res.status(400).json(error));
 };
