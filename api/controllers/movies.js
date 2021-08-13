@@ -69,11 +69,12 @@ controller.getTopRated = (req, res) => {
 // MOVIE DETAILS
 controller.getDetails = (req, res) => {
     let parameters = queryParameters.getParametersBy(req);
-    let detailsRequest = axios.get(providerBaseURL + `/${req.params.id}?api_key=` + providerAPIKey + parameters);
-    let creditsRequest = axios.get(providerBaseURL + `/${req.params.id}/credits?api_key=` + providerAPIKey + parameters);
-    let externalIDsRequest = axios.get(providerBaseURL + `/${req.params.id}/external_ids?api_key=` + providerAPIKey + parameters);
-    let recommendationsRequest = axios.get(providerBaseURL + `/${req.params.id}/recommendations?api_key=` + providerAPIKey + parameters);
-    let watchProvidersRequest = axios.get(providerBaseURL + `/${req.params.id}/watch/providers?api_key=` + providerAPIKey + parameters);
+    let movieID = req.params.id;
+    let detailsRequest = axios.get(providerBaseURL + `/${movieID}?api_key=` + providerAPIKey + parameters);
+    let creditsRequest = axios.get(providerBaseURL + `/${movieID}/credits?api_key=` + providerAPIKey + parameters);
+    let externalIDsRequest = axios.get(providerBaseURL + `/${movieID}/external_ids?api_key=` + providerAPIKey + parameters);
+    let recommendationsRequest = axios.get(providerBaseURL + `/${movieID}/recommendations?api_key=` + providerAPIKey + parameters);
+    let watchProvidersRequest = axios.get(providerBaseURL + `/${movieID}/watch/providers?api_key=` + providerAPIKey + parameters);
 
     axios.all([detailsRequest, creditsRequest, externalIDsRequest, recommendationsRequest, watchProvidersRequest]).then(axios.spread((...responses) => {
         let details = responses[0];

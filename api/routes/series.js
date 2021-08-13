@@ -10,6 +10,8 @@ module.exports = app => {
     router.get('/top-rated', controller.getTopRated);
 
     router.get('/:id', controller.getDetails);
+    router.get('/:id/season/:seasonID', controller.getSeasonDetails);
+    router.get('/:id/season/:seasonID/episode/:episodeID', controller.getEpisodeDetails);
     
     app.use('/series', router);
 };

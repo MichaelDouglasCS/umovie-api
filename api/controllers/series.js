@@ -69,11 +69,12 @@ controller.getTopRated = (req, res) => {
 // SERIE DETAILS
 controller.getDetails = (req, res) => {
     let parameters = queryParameters.getParametersBy(req);
-    let detailsRequest = axios.get(providerBaseURL + `/${req.params.id}?api_key=` + providerAPIKey + parameters);
-    let creditsRequest = axios.get(providerBaseURL + `/${req.params.id}/credits?api_key=` + providerAPIKey + parameters);
-    let externalIDsRequest = axios.get(providerBaseURL + `/${req.params.id}/external_ids?api_key=` + providerAPIKey + parameters);
-    let recommendationsRequest = axios.get(providerBaseURL + `/${req.params.id}/recommendations?api_key=` + providerAPIKey + parameters);
-    let watchProvidersRequest = axios.get(providerBaseURL + `/${req.params.id}/watch/providers?api_key=` + providerAPIKey + parameters);
+    let serieID = req.params.id;
+    let detailsRequest = axios.get(providerBaseURL + `/${serieID}?api_key=` + providerAPIKey + parameters);
+    let creditsRequest = axios.get(providerBaseURL + `/${serieID}/credits?api_key=` + providerAPIKey + parameters);
+    let externalIDsRequest = axios.get(providerBaseURL + `/${serieID}/external_ids?api_key=` + providerAPIKey + parameters);
+    let recommendationsRequest = axios.get(providerBaseURL + `/${serieID}/recommendations?api_key=` + providerAPIKey + parameters);
+    let watchProvidersRequest = axios.get(providerBaseURL + `/${serieID}/watch/providers?api_key=` + providerAPIKey + parameters);
 
     axios.all([detailsRequest, creditsRequest, externalIDsRequest, recommendationsRequest, watchProvidersRequest]).then(axios.spread((...responses) => {
         let details = responses[0];
@@ -89,6 +90,29 @@ controller.getDetails = (req, res) => {
             watchProviders: watchProviders.data
         });
     })).catch(error => res.status(400).json(error));
+};
+
+// SEASON DETAILS
+controller.getSeasonDetails = (req, res) => {
+    let parameters = queryParameters.getParametersBy(req);
+    let serieID = req.params.id;
+    let seasonID = req.params.seasonID;
+    axios.get(providerBaseURL + `/${serieID}/season/${seasonID}?api_key=` + providerAPIKey + parameters)
+        .then((response) => {
+            res.status(200).json(response.data);
+        }).catch(error => res.status(400).json(error));
+};
+
+// EPISODE DETAILS
+controller.getEpisodeDetails = (req, res) => {
+    let parameters = queryParameters.getParametersBy(req);
+    let serieID = req.params.id;
+    let seasonID = req.params.seasonID;
+    let episodeID = req.params.episodeID;
+    axios.get(providerBaseURL + `/${serieID}/season/${seasonID}/episode/${episodeID}?api_key=` + providerAPIKey + parameters)
+        .then((response) => {
+            res.status(200).json(response.data);
+        }).catch(error => res.status(400).json(error));
 };
 
 module.exports = controller;
