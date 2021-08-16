@@ -89,10 +89,8 @@ controller.getDetails = (req, res) => {
         watchProvidersRequest
     ]).then(axios.spread((...responses) => {
         let details = responses[0].data;
-        delete details.release_date;
-        details.release_info = responses[2].data.results.filter((result) => result.iso_3166_1 == region)[0].release_dates[0];
-
         let videos = responses[1].data.results;
+        details.release_dates = responses[2].data.results;
         let credits = responses[3].data;
         let externalIDs = responses[4].data;
         let recommendations = responses[5].data;
