@@ -30,15 +30,15 @@ controller.getSuggestions = (req, res) => {
     let peopleRequest = axios.get('https://api.themoviedb.org/3/person/popular?api_key=' + providerAPIKey + parameters);
 
     axios.all([moviesRequest, seriesRequest, genresRequest, peopleRequest]).then(axios.spread((...responses) => {
-        let movies = responses[0];
-        let series = responses[1];
-        let genres = responses[2];
-        let people = responses[3];
+        let movies = responses[0].data.results;
+        let series = responses[1].data.results;
+        let genres = responses[2].data.genres;
+        let people = responses[3].data.results;
         res.status(200).json({
-            movies: movies.data.results,
-            series: series.data.results,
-            genres: genres.data.genres,
-            people: people.data.results
+            movies: movies,
+            series: series,
+            genres: genres,
+            people: people
         });
     })).catch(error => res.status(400).json(error));
 };

@@ -69,25 +69,36 @@ controller.getTopRated = (req, res) => {
 // SERIE DETAILS
 controller.getDetails = (req, res) => {
     let parameters = queryParameters.getParametersBy(req);
+    let region = req.query.region ?? "BR";
     let serieID = req.params.id;
     let detailsRequest = axios.get(providerBaseURL + `/${serieID}?api_key=` + providerAPIKey + parameters);
+    let videosRequest = axios.get(providerBaseURL + `/${serieID}/videos?api_key=` + providerAPIKey + parameters);
     let creditsRequest = axios.get(providerBaseURL + `/${serieID}/credits?api_key=` + providerAPIKey + parameters);
     let externalIDsRequest = axios.get(providerBaseURL + `/${serieID}/external_ids?api_key=` + providerAPIKey + parameters);
     let recommendationsRequest = axios.get(providerBaseURL + `/${serieID}/recommendations?api_key=` + providerAPIKey + parameters);
     let watchProvidersRequest = axios.get(providerBaseURL + `/${serieID}/watch/providers?api_key=` + providerAPIKey + parameters);
 
-    axios.all([detailsRequest, creditsRequest, externalIDsRequest, recommendationsRequest, watchProvidersRequest]).then(axios.spread((...responses) => {
-        let details = responses[0];
-        let credits = responses[1];
-        let externalIDs = responses[2];
-        let recommendations = responses[3];
-        let watchProviders = responses[4];
+    axios.all([
+        detailsRequest, 
+        videosRequest, 
+        creditsRequest, 
+        externalIDsRequest, 
+        recommendationsRequest, 
+        watchProvidersRequest
+    ]).then(axios.spread((...responses) => {
+        let details = responses[0].data;
+        let videos = responses[1].data.results;
+        let credits = responses[2].data;
+        let externalIDs = responses[3].data;
+        let recommendations = responses[4].data;
+        let watchProviders = responses[5].data;
         res.status(200).json({
-            "details": details.data,
-            "credits": credits.data,
-            "external_ids": externalIDs.data,
-            "recommendations": recommendations.data,
-            "watch_providers": watchProviders.data
+            "details": details,
+            "videos": videos,
+            "credits": credits,
+            "externa_ids": externalIDs,
+            "recommendations": recommendations.results,
+            "watch_providers": watchProviders.results[region]
         });
     })).catch(error => res.status(400).json(error));
 };

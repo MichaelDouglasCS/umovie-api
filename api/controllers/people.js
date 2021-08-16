@@ -14,13 +14,13 @@ controller.getDetails = (req, res) => {
     let externalIDsRequest = axios.get(providerBaseURL + `/${req.params.id}/external_ids?api_key=` + providerAPIKey + parameters);
 
     axios.all([detailsRequest, creditsRequest, externalIDsRequest]).then(axios.spread((...responses) => {
-        let details = responses[0];
-        let credits = responses[1];
-        let externalIDs = responses[2];
+        let details = responses[0].data;
+        let credits = responses[1].data;
+        let externalIDs = responses[2].data;
         res.status(200).json({
-            "details": details.data,
-            "credits": credits.data,
-            "external_ids": externalIDs.data
+            "details": details,
+            "credits": credits,
+            "external_ids": externalIDs
         });
     })).catch(error => res.status(400).json(error));
 };
